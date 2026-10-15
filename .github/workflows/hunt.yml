@@ -2,7 +2,7 @@ name: hunt
 
 on:
   schedule:
-    - cron: "*/15 * * * *"    # every 15 minutes (GitHub's fastest)
+    - cron: "3,18,33,48 * * * *"    # every 15 minutes (GitHub's fastest)
   workflow_dispatch:          # also allows a manual "Run now" button
 
 permissions:
