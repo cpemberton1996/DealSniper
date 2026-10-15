@@ -1,0 +1,47 @@
+name: hunt
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"    # every 15 minutes (GitHub's fastest)
+  workflow_dispatch:          # also allows a manual "Run now" button
+
+permissions:
+  contents: write             # lets the bot save its progress
+
+concurrency:
+  group: hunt
+  cancel-in-progress: false
+
+jobs:
+  hunt:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v4
+
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install libraries
+        run: pip install -r requirements.txt
+
+      - name: Run the bot
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          TRAVELPAYOUTS_TOKEN: ${{ secrets.TRAVELPAYOUTS_TOKEN }}
+        run: python run_bot.py
+
+      - name: Write heartbeat
+        run: |
+          mkdir -p state
+          date -u +"%Y-%m-%dT%H:%M:%SZ" > state/heartbeat.txt
+
+      - name: Save progress
+        run: |
+          git config user.name  "deal-bot"
+          git config user.email "deal-bot@users.noreply.github.com"
+          git add -A state/
+          git diff --cached --quiet || git commit -m "bot: update state"
+          git push
