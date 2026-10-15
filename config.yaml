@@ -1,0 +1,83 @@
+# ============================================================
+#   THIS IS THE FILE YOU EDIT. Nothing else needs changing.
+# ============================================================
+
+# Airports you'd realistically fly out of.
+# Deals mentioning these score MUCH higher.
+home_airports: [LIT, MEM, DFW, XNA, OKC]
+
+# Only alert on fares cheaper than this (US dollars)
+max_alert_price: 400
+
+# How picky the bot is, 0-100. Higher = fewer, better alerts.
+# Start here. If you get too much noise, raise it to 65 or 70.
+min_feed_score: 55
+
+# Phrases that make a deal more interesting
+boost_keywords:
+  - "error fare"
+  - "mistake fare"
+  - "glitch"
+  - "business class"
+  - "first class"
+  - "lie-flat"
+  - "flash sale"
+  - "price drop"
+
+# Phrases that mean "ignore this"
+kill_keywords:
+  - "credit card"
+  - "how to"
+  - "review:"
+  - "giveaway"
+  - "transfer bonus"
+
+# ---------------- FLIGHT DEAL SOURCES ----------------
+# weight (0-10) = how much the bot trusts this source
+feeds:
+  - name: "Secret Flying"
+    url: "https://www.secretflying.com/feed/"
+    weight: 10
+  - name: "Fly4Free"
+    url: "https://www.fly4free.com/feed/"
+    weight: 9
+  - name: "The Flight Deal"
+    url: "https://www.theflightdeal.com/feed/"
+    weight: 8
+  - name: "Holiday Pirates"
+    url: "https://www.holidaypirates.com/rss"
+    weight: 7
+  - name: "Reddit r/travel"
+    url: "https://www.reddit.com/r/travel/new/.rss"
+    weight: 3
+
+# ---------------- CRUISE SOURCES ----------------
+cruise_keywords:
+  - "price drop"
+  - "repositioning"
+  - "kids sail free"
+  - "flash sale"
+  - "last minute"
+  - "reduced deposit"
+
+cruise_feeds:
+  - name: "Reddit r/Cruise"
+    url: "https://www.reddit.com/r/Cruise/new/.rss"
+    weight: 6
+  - name: "Fly4Free Cruises"
+    url: "https://www.fly4free.com/cruises/feed/"
+    weight: 7
+
+# ---------------- PRICE WATCHER ----------------
+# A fare this far below its own recent average = MISTAKE FARE siren
+mistake_fare_threshold: 0.45
+
+# Milder threshold for a normal "good deal" ping
+drop_threshold: 0.25
+
+# Destinations to watch. Start small - see the note at the bottom
+# of the guide before you make this list longer.
+watch_routes: [CUN, MIA, LAS, LHR, FCO, NRT]
+
+# Months to check, in YYYY-MM format
+months: ["2027-02", "2027-06"]
