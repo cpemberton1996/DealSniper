@@ -101,11 +101,12 @@ def strip_html(s):
     return re.sub(r"\s+", " ", HTML_TAG.sub(" ", s or "")).strip()
 
 
-def score_item(text, cfg, extra_keywords=()):
+def score_item(text, cfg, extra_keywords=(), kill_keywords=()):
     """Rate an item 0-100. Higher = more likely to be a real deal."""
     t = text.lower()
 
-    if any(k.lower() in t for k in cfg.get("kill_keywords", [])):
+    kills = list(cfg.get("kill_keywords", [])) + list(kill_keywords)
+    if any(k.lower() in t for k in kills):
         return 0
 
     s = 30
