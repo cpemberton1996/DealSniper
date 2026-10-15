@@ -4,7 +4,7 @@
 
 # Airports you'd realistically fly out of.
 # Deals mentioning these score MUCH higher.
-home_airports: [BNA, FLL, MCO, BWI, PBI]
+home_airports: [BNA, FLL, MCO, BWI, PBI, TYS]
 
 # Only alert on fares cheaper than this (US dollars)
 max_alert_price: 350
