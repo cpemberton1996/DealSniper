@@ -94,6 +94,12 @@ cruise_kill_keywords:
   - "crew member"
 
 cruise_feeds:
+- name: "Reddit cruise price drops"
+    url: "https://www.reddit.com/r/Cruise/search.rss?q=price+drop&restrict_sr=1&sort=new"
+    weight: 8
+  - name: "Reddit cruise deals"
+    url: "https://www.reddit.com/r/Cruise/search.rss?q=deal+OR+sale+OR+cheap&restrict_sr=1&sort=new"
+    weight: 8
   - name: "Cruzely"
     url: "https://www.cruzely.com/feed/"
     weight: 7
