@@ -164,3 +164,107 @@ watch_routes: [CUN, MIA, LAS, LHR, FCO, NRT]
 
 # Months to check, in YYYY-MM format
 months: ["2027-02", "2027-06"]
+
+# ============================================================
+#  LUXURY ALL-INCLUSIVE RESORT SNIPER
+# ============================================================
+
+resorts:
+  # Only alert when the deal is at least this far below the reference rate
+  min_discount: 0.55
+
+  # Ignore anything outside this per-person, per-night range (USD).
+  # Stops $89 budget resorts and $2,000 ultra-lux from skewing things.
+  min_pp_per_night: 60
+  max_pp_per_night: 900
+
+  # Used when a post mentions a luxury resort that isn't in the table below
+  default_luxury_reference: 420
+
+  # ---- THE IMPORTANT BIT ----
+  # Typical per-PERSON, per-NIGHT rate at normal booking prices.
+  # "55% off" is measured against these numbers, so tune them.
+  reference_prices:
+    "le blanc": 550
+    "grand velas": 650
+    "excellence playa mujeres": 380
+    "excellence riviera": 360
+    "excellence punta cana": 380
+    "excellence oyster bay": 400
+    "unico 20": 420
+    "xcaret arte": 500
+    "xcaret mexico": 430
+    "zoetry": 450
+    "impressions isla mujeres": 450
+    "impressions moxche": 430
+    "secrets moxche": 350
+    "secrets playa mujeres": 320
+    "atelier playa mujeres": 400
+    "valentin imperial": 300
+    "trs coral": 320
+    "trs yucatan": 310
+    "iberostar grand": 400
+    "palafitos": 400
+    "waldorf astoria cancun": 500
+    "banyan tree mayakoba": 600
+    "sandals royal": 480
+    "sandals grande": 480
+    "beaches turks": 520
+    "curtain bluff": 800
+    "jade mountain": 950
+    "hermitage bay": 850
+    "bodyholiday": 500
+    "spice island": 700
+    "calabash": 450
+    "galley bay": 500
+    "carlisle bay": 600
+    "palm island": 700
+    "petit st vincent": 900
+    "east winds": 500
+    "ladera": 800
+
+  # Phrases that mark a post as luxury-tier even if the resort is unknown
+  luxury_keywords:
+    - "ultra luxury"
+    - "ultra-luxury"
+    - "five star"
+    - "5-star"
+    - "adults only"
+    - "adults-only"
+    - "butler service"
+    - "swim-up suite"
+    - "swim up suite"
+    - "overwater"
+    - "plunge pool"
+    - "michelin"
+    - "private pool suite"
+
+  # Posts containing these are ignored
+  kill_keywords:
+    - "cruise"
+    - "flight only"
+    - "flights only"
+    - "villa"
+    - "airbnb"
+    - "timeshare"
+    - "points transfer"
+
+  feeds:
+    - name: "Secret Flying Hotels"
+      url: "https://www.secretflying.com/hotel-deals/feed/"
+      weight: 10
+    - name: "Fly4Free"
+      url: "https://www.fly4free.com/feed/"
+      weight: 8
+    - name: "Holiday Pirates"
+      url: "https://www.holidaypirates.com/feed/"
+      weight: 8
+    - name: "Reddit r/AllInclusiveResorts"
+      url: "https://www.reddit.com/r/AllInclusiveResorts/new/.rss"
+      weight: 6
+    - name: "Reddit r/traveldeals"
+      url: "https://www.reddit.com/r/traveldeals/new/.rss"
+      weight: 5
+    - name: "Reddit AI deal search"
+      url: "https://www.reddit.com/r/travel/search.rss?q=all+inclusive+deal&restrict_sr=1&sort=new"
+      weight: 6
