@@ -1,0 +1,92 @@
+feedparser==6.0.11
+requests==2.32.3
+PyYAML==6.0.2
+
+home_airports: [BNA, PBI, FLL, MCO, BWI]
+
+max_alert_price: 400
+
+mistake_fare_threshold: 0.55
+
+drop_threshold: 0.25
+
+min_feed_score: 55
+
+# Phrases that boost an item's score
+boost_keywords:
+  - "error fare"
+  - "mistake fare"
+  - "glitch"
+  - "business class"
+  - "first class"
+  - "lie-flat"
+  - "flash sale"
+  - "price drop"
+  - "mistake"
+
+# Phrases that kill an item (blog spam, points articles, etc.)
+kill_keywords:
+  - "credit card"
+  - "how to"
+  - "review:"
+  - "giveaway"
+  - "transfer bonus"
+  - "best credit"
+
+# ---------- FLIGHT DEAL FEEDS ----------
+feeds:
+  - name: "Secret Flying"
+    url: "https://www.secretflying.com/feed/"
+    weight: 10
+  - name: "Fly4Free"
+    url: "https://www.fly4free.com/feed/"
+    weight: 9
+  - name: "The Flight Deal"
+    url: "https://www.theflightdeal.com/feed/"
+    weight: 8
+  - name: "Holiday Pirates"
+    url: "https://www.holidaypirates.com/rss"
+    weight: 7
+  - name: "DansDeals"
+    url: "https://www.dansdeals.com/feed/"
+    weight: 5
+  - name: "Reddit r/awardtravel"
+    url: "https://www.reddit.com/r/awardtravel/new/.rss"
+    weight: 4
+  - name: "Reddit r/travel"
+    url: "https://www.reddit.com/r/travel/new/.rss"
+    weight: 3
+
+# ---------- CRUISE FEEDS ----------
+cruise_feeds:
+  - name: "Cruise Critic Deals"
+    url: "https://www.cruisecritic.com/rss/news"
+    weight: 8
+  - name: "Reddit r/Cruise"
+    url: "https://www.reddit.com/r/Cruise/new/.rss"
+    weight: 6
+  - name: "Reddit r/CruiseDeals"
+    url: "https://www.reddit.com/r/CruiseDeals/new/.rss"
+    weight: 7
+  - name: "Fly4Free Cruises"
+    url: "https://www.fly4free.com/cruises/feed/"
+    weight: 7
+
+# Cruise-specific scoring
+cruise_keywords:
+  - "price drop"
+  - "repositioning"
+  - "reposition"
+  - "free cabin"
+  - "kids sail free"
+  - "reduced deposit"
+  - "flash sale"
+  - "solo"
+  - "last minute"
+
+# ---------- ROUTES TO PRICE-SCAN ----------
+# Each origin x destination x month gets its own price history.
+watch_routes: [CUN, MIA, LAS, LHR, CDG, FCO, NRT, BCN, SJU, AUA]
+
+# Months to scan (YYYY-MM). Keep this short to stay under free API limits.
+months: ["2027-01", "2027-03", "2027-06"]
