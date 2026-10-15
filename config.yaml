@@ -4,14 +4,14 @@
 
 # Airports you'd realistically fly out of.
 # Deals mentioning these score MUCH higher.
-home_airports: [LIT, MEM, DFW, XNA, OKC]
+home_airports: [BNA, FLL, MCO, BWI, PBI]
 
 # Only alert on fares cheaper than this (US dollars)
-max_alert_price: 400
+max_alert_price: 350
 
 # How picky the bot is, 0-100. Higher = fewer, better alerts.
 # Start here. If you get too much noise, raise it to 65 or 70.
-min_feed_score: 55
+min_feed_score: 60
 
 # Phrases that make a deal more interesting
 boost_keywords:
@@ -52,22 +52,99 @@ feeds:
     weight: 3
 
 # ---------------- CRUISE SOURCES ----------------
+
+# How picky to be on cruise items specifically.
+# Cruise sites are NEWS sites, not deal sites, so this is higher
+# than min_feed_score to keep hurricane updates out of your phone.
+cruise_min_score: 68
+
+# Words that make a cruise item worth alerting on
 cruise_keywords:
   - "price drop"
+  - "flash sale"
+  - "deal"
+  - "sale"
+  - "discount"
+  - "% off"
+  - "save"
   - "repositioning"
   - "kids sail free"
-  - "flash sale"
-  - "last minute"
+  - "free fares"
   - "reduced deposit"
+  - "last minute"
+  - "solo"
+  - "wave season"
+  - "black friday"
+  - "from $"
+  - "per person"
+
+# Words that mean "this is just news, skip it"
+cruise_kill_keywords:
+  - "hurricane"
+  - "tropical storm"
+  - "itinerary change"
+  - "cdc inspection"
+  - "overboard"
+  - "rescue"
+  - "dry dock"
+  - "takes delivery"
+  - "appoints"
+  - "shore power"
+  - "emissions"
+  - "crew member"
 
 cruise_feeds:
+  - name: "Cruzely"
+    url: "https://www.cruzely.com/feed/"
+    weight: 7
+  - name: "Cruise Fever"
+    url: "https://cruisefever.net/feed/"
+    weight: 7
+  - name: "Cruise Mummy"
+    url: "https://www.cruisemummy.co.uk/feed/"
+    weight: 6
+  - name: "Cruise Hive"
+    url: "https://www.cruisehive.com/feed/"
+    weight: 6
+  - name: "Royal Caribbean Blog"
+    url: "https://www.royalcaribbeanblog.com/rss.xml"
+    weight: 6
+  - name: "Cruise Radio"
+    url: "https://www.cruiseradio.net/feed/"
+    weight: 5
+  - name: "Emma Cruises"
+    url: "https://emmacruises.com/feed/"
+    weight: 5
+  - name: "Cruise Industry News"
+    url: "https://cruiseindustrynews.com/feed/"
+    weight: 4
+  - name: "Holiday Pirates"
+    url: "https://www.holidaypirates.com/feed/"
+    weight: 8
   - name: "Reddit r/Cruise"
     url: "https://www.reddit.com/r/Cruise/new/.rss"
     weight: 6
-  - name: "Fly4Free Cruises"
-    url: "https://www.fly4free.com/cruises/feed/"
-    weight: 7
-
+  - name: "Reddit r/royalcaribbean"
+    url: "https://www.reddit.com/r/royalcaribbean/new/.rss"
+    weight: 5
+  - name: "Reddit r/CarnivalCruiseFans"
+    url: "https://www.reddit.com/r/CarnivalCruiseFans/new/.rss"
+    weight: 5
+  - name: "Reddit r/NCL"
+    url: "https://www.reddit.com/r/NCL/new/.rss"
+    weight: 5
+  - name: "Reddit r/VirginVoyages"
+    url: "https://www.reddit.com/r/VirginVoyages/new/.rss"
+    weight: 5
+  - name: "Reddit r/DisneyCruise"
+    url: "https://www.reddit.com/r/DisneyCruise/new/.rss"
+    weight: 4
+  - name: "Reddit r/MSCCruises"
+    url: "https://www.reddit.com/r/MSCCruises/new/.rss"
+    weight: 4
+  - name: "Reddit r/PrincessCruises"
+    url: "https://www.reddit.com/r/PrincessCruises/new/.rss"
+    weight: 4
 # ---------------- PRICE WATCHER ----------------
 # A fare this far below its own recent average = MISTAKE FARE siren
 mistake_fare_threshold: 0.45
