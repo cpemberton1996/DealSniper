@@ -136,15 +136,20 @@ def score_item(text, cfg, extra_keywords=(), kill_keywords=()):
 def run_feeds(cfg, state):
     """Watch deal feeds. Free, no API key, runs every cycle."""
     first_run = len(state["seen"]) == 0
-    threshold = 75 if first_run else cfg.get("min_feed_score", 55)
     count = 0
 
     groups = [
-        ("flight", cfg.get("feeds", []), ()),
-        ("cruise", cfg.get("cruise_feeds", []), tuple(cfg.get("cruise_keywords", []))),
+        ("flight", cfg.get("feeds", []), (), (),
+         cfg.get("min_feed_score", 55)),
+        ("cruise", cfg.get("cruise_feeds", []),
+         tuple(cfg.get("cruise_keywords", [])),
+         tuple(cfg.get("cruise_kill_keywords", [])),
+         cfg.get("cruise_min_score", 60)),
     ]
 
-    for _label, feeds, extra in groups:
+    for _label, feeds, extra, kills, group_threshold in groups:
+        threshold = 75 if first_run else group_threshold
+
         for feed in feeds:
             try:
                 parsed = feedparser.parse(feed["url"], request_headers=USER_AGENT)
@@ -166,12 +171,13 @@ def run_feeds(cfg, state):
                 body = strip_html(entry.get("summary", ""))[:500]
                 link = entry.get("link", "")
 
-                s = score_item(f"{title} {body}", cfg, extra) + feed.get("weight", 0) // 2
+                s = score_item(f"{title} {body}", cfg, extra, kills)
+                s += feed.get("weight", 0) // 2
 
                 if s >= threshold:
                     notify(cfg, f"[{s}] {feed['name']}", f"{title}\n\n{body}",
                            url=link, high=(s >= 85),
-                           tags=["rotating_light"] if s >= 85 else ["airplane"])
+                           tags=["rotating_light"] if s >= 85 else ["ship"])
                     count += 1
                     print(f"    ALERT ({s}) {title}")
 
